@@ -1,0 +1,11 @@
+{
+  "name": "ChatServer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "serve-handler": "^6.1.3",
+    "ws": "^8.8.1"
+  }
+}
