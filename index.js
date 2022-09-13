@@ -13,8 +13,13 @@ wss.on('connection',(client)=>{
   client.on('message',(msg)=>{
     history.push(msg);
     console.log(`Message:${msg}`);
-    if(msg == "HIST")
-        for(let msg of history) client.send(msg);
+
+    //asking for history
+    if(msg == "HIST"){
+      console.log('asked for history');
+      client.send('HISTORY|' + history.join("%\n%"));
+    }
+
     broadcast(msg)
   })
 });
@@ -22,7 +27,7 @@ wss.on('connection',(client)=>{
 function broadcast(msg) {       // (4)
   for(const client of wss.clients){
     if(client.readyState === ws.OPEN){
-      client.send(msg)
+      client.send('ACTIVECHANNEL|' + msg)
     }
   }
 }
